@@ -10,7 +10,8 @@ export default (state = initialState, action) => {
     case FETCH_TASKS:
       return {
         ...state,
-        tasks: action.payload
+        tasks: action.payload,
+        task: state.task
       };
     case NEW_TASK:
       return {
