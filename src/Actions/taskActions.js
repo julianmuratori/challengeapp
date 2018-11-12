@@ -7,7 +7,8 @@ export const fetchTasks = () => dispatch => {
     .then(tasks => {
       dispatch({
         type: FETCH_TASKS,
-        payload: tasks
+        // Rewriting this as tasks.data, but delete data if it breaks
+        payload: tasks.data
       });
     })
     .catch(err => {
@@ -16,13 +17,17 @@ export const fetchTasks = () => dispatch => {
 };
 
 export const submitNewTask = taskData => dispatch => {
-  console.log(taskData);
   axios
-    .post("mongodb://peepee1:peepee1@ds159273.mlab.com:59273/partyboy")
+    .post("http://localhost:6969/yo", {
+      title: taskData.title,
+      description: taskData.description,
+      tags: taskData.tags
+    })
     .then(task => {
+      console.log(task.data);
       dispatch({
         type: NEW_TASK,
-        payload: task
+        payload: task.data
       });
     })
     .catch(err => {

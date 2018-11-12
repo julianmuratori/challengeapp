@@ -12,20 +12,20 @@ class Tasks extends Component {
   render() {
     const { tasks } = this.props;
 
-    // FIGURE OUT HOW TO ADD A LOADING SCREEN
+    // FIGURE OUT HOW TO ADD A LOADING SCREEN IF YOU HAVE TIME
     if (!tasks) {
       return <h1>Loading...</h1>;
     }
     return (
       <div>
         <h1>Your current tasks</h1>
-        {tasks.map(task => {
+        {Object.keys(tasks).map(task => {
           return (
             <Task
-              title={task.title}
-              description={task.description}
-              tags={task.tags}
-              key={task.id}
+              title={tasks[task].title}
+              description={tasks[task].description}
+              tags={tasks[task].tags}
+              key={tasks[task].id}
             />
           );
         })}
@@ -39,7 +39,7 @@ Tasks.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  tasks: state.tasks.tasks.data
+  tasks: state.tasks.tasks
 });
 
 export default connect(
